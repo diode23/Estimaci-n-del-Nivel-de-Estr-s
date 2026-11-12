@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resultado de la predicción</title>
+
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{ url_for('static', filename='styles.css') }}"
+    >
+</head>
+
+<body>
+    <main class="container result-container">
+        <h1>Resultado</h1>
+
+        <section class="result-card" aria-live="polite">
+            <p class="result-label">
+                Nivel de estrés predicho
+            </p>
+
+            <p class="result-value">
+                {{ stress_level }}
+            </p>
+
+            {% if stress_level|string|lower in ['0', 'bajo', 'low'] %}
+                <p class="result-status result-status-low">
+                    Nivel de estrés bajo
+                </p>
+
+                <p class="result-description">
+                    Los datos introducidos indican un nivel de estrés bajo
+                    según el modelo.
+                </p>
+
+            {% elif stress_level|string|lower in ['1', 'moderado', 'moderate'] %}
+                <p class="result-status result-status-moderate">
+                    Nivel de estrés moderado
+                </p>
+
+                <p class="result-description">
+                    Los datos introducidos indican un nivel de estrés moderado
+                    según el modelo.
+                </p>
+
+            {% elif stress_level|string|lower in ['2', 'alto', 'high'] %}
+                <p class="result-status result-status-high">
+                    Nivel de estrés alto
+                </p>
+
+                <p class="result-description">
+                    Los datos introducidos indican un nivel de estrés alto
+                    según el modelo.
+                </p>
+
+            {% else %}
+                <p class="result-status">
+                    Resultado del modelo: {{ stress_level }}
+                </p>
+
+                <p class="result-description">
+                    El modelo devolvió el valor mostrado anteriormente.
+                </p>
+            {% endif %}
+        </section>
+
+        <div class="result-actions">
+            <a class="btn btn-primary" href="/">
+                Realizar otra evaluación
+            </a>
+        </div>
+
+        <p class="result-disclaimer">
+            Este resultado tiene fines educativos y no constituye un diagnóstico
+            médico ni psicológico. Si tienes preocupaciones sobre tu salud
+            mental, consulta con un profesional cualificado.
+        </p>
+    </main>
+</body>
+</html>

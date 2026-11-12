@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nivel de estrés</title>
+
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{ url_for('static', filename='styles.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+    >
+
+    <script>
+        function validateForm() {
+            const inputs = document.querySelectorAll('input[type="number"]');
+
+            for (let i = 0; i < inputs.length; i++) {
+                const input = inputs[i];
+
+                if (input.value === "" || isNaN(input.value)) {
+                    alert("Introduce un valor válido en todos los campos.");
+                    input.focus();
+                    return false;
+                }
+
+                const value = Number(input.value);
+                const min = Number(input.min);
+                const max = Number(input.max);
+
+                if (value < min || value > max) {
+                    alert(
+                        `El valor de "${input.labels[0].textContent}" debe estar entre ${min} y ${max}.`
+                    );
+                    input.focus();
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+    <main class="container">
+        <header class="page-header">
+            <h1>Nivel de estrés</h1>
+
+            <p>
+                Completa los siguientes campos para estimar el nivel de estrés.
+            </p>
+
+            <div class="warning">
+                Esta herramienta tiene fines educativos y no sustituye una
+                evaluación realizada por un profesional de la salud.
+            </div>
+        </header>
+
+        <form action="/" method="post" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="anxiety_level">
+                    Nivel de ansiedad
+                    <span>0-20</span>
+                </label>
+
+                <input
+                    type="number"
+                    id="anxiety_level"
+                    name="anxiety_level"
+                    min="0"
+                    max="20"
+                    step="1"
+                    placeholder="Ejemplo: 8"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="mental_health_history">
+                    Antecedentes de salud mental
+                    <span>0-5</span>
+                </label>
+
+                <input
+                    type="number"
+                    id="mental_health_history"
+                    name="mental_health_history"
+                    min="0"
+                    max="5"
+                    step="1"
+                    placeholder="Ejemplo: 2"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="depression">
+                    Nivel de depresión
+                    <span>0-25</span>
+                </label>
+
+                <input
+                    type="number"
+                    id="depression"
+                    name="depression"
+                    min="0"
+                    max="25"
+                    step="1"
+                    placeholder="Ejemplo: 10"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="headache">
+                    Frecuencia de dolores de cabeza
+                    <span>0-7</span>
+                </label>
+
+                <input
+                    type="number"
+                    id="headache"
+                    name="headache"
+                    min="0"
+                    max="7"
+                    step="1"
+                    placeholder="Ejemplo: 3"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="sleep_quality">
+                    Calidad del sueño
+                    <span>0-7</span>
+                </label>
+
+                <input
+                    type="number"
+                    id="sleep_quality"
+                    name="sleep_quality"
+                    min="0"
+                    max="7"
+                    step="1"
+                    placeholder="Ejemplo: 5"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="breathing_problem">
+                    Problemas respiratorios
+                    <span>0-5</span>
+                </label>
+
+                <input
+                    type="number"
+                    id="breathing_problem"
+                    name="breathing_problem"
+                    min="0"
+                    max="5"
+                    step="1"
+                    placeholder="Ejemplo: 1"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="living_conditions">
+                    Condiciones de vida
+                    <span>0-5</span>
+                </label>
+
+                <input
+                    type="number"
+                    id="living_conditions"
+                    name="living_conditions"
+                    min="0"
+                    max="5"
+                    step="1"
+                    placeholder="Ejemplo: 3"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="academic_performance">
+                    Rendimiento académico
+                    <span>0-5</span>
+                </label>
+
+                <input
+                    type="number"
+                    id="academic_performance"
+                    name="academic_performance"
+                    min="0"
+                    max="5"
+                    step="1"
+                    placeholder="Ejemplo: 4"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="study_load">
+                    Carga de estudio
+                    <span>0-5</span>
+                </label>
+
+                <input
+                    type="number"
+                    id="study_load"
+                    name="study_load"
+                    min="0"
+                    max="5"
+                    step="1"
+                    placeholder="Ejemplo: 3"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="future_career_concerns">
+                    Preocupación por el futuro profesional
+                    <span>0-5</span>
+                </label>
+
+                <input
+                    type="number"
+                    id="future_career_concerns"
+                    name="future_career_concerns"
+                    min="0"
+                    max="5"
+                    step="1"
+                    placeholder="Ejemplo: 4"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="extracurricular_activities">
+                    Actividades extracurriculares
+                    <span>0-5</span>
+                </label>
+
+                <input
+                    type="number"
+                    id="extracurricular_activities"
+                    name="extracurricular_activities"
+                    min="0"
+                    max="5"
+                    step="1"
+                    placeholder="Ejemplo: 2"
+                    required
+                >
+            </div>
+
+            <div class="center-button">
+                <button type="submit" class="btn btn-primary">
+                    Calcular nivel de estrés
+                </button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
